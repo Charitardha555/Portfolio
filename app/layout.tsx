@@ -1,51 +1,29 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Space_Grotesk } from "next/font/google";
-
 import "./globals.css";
 
-const display = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display"
-});
-
-const sans = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-sans"
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-domain.vercel.app"),
-  title: {
-    default: "Your Name | Portfolio",
-    template: "%s | Your Name"
-  },
-  description:
-    "A cinematic, Vercel-ready portfolio with blog publishing and a protected Google admin dashboard.",
-  openGraph: {
-    title: "Your Name | Portfolio",
-    description:
-      "A cinematic, Vercel-ready portfolio with blog publishing and a protected Google admin dashboard.",
-    url: "/",
-    siteName: "Your Name Portfolio",
-    type: "website"
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Your Name | Portfolio",
-    description:
-      "A cinematic, Vercel-ready portfolio with blog publishing and a protected Google admin dashboard."
-  }
+  title: "SYSTEM://PORTFOLIO | Cyber Security Head",
+  description: "Elite Cybersecurity Professional — Penetration Tester, Threat Hunter, Government Collaborator",
 };
 
 export default function RootLayout({
-  children
-}: Readonly<{
+  children,
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body>{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&family=Orbitron:wght@400;600;700;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="bg-black text-cyber-green font-mono antialiased">
+        {children}
+      </body>
     </html>
   );
 }
