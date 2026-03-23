@@ -1,280 +1,435 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import { getPortfolioData, settingValue } from "@/lib/site-data";
+const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: false });
+const TypingText = dynamic(() => import("../components/TypingText"), { ssr: false });
 
-function sectionTitle(eyebrow: string, title: string, copy?: string) {
+const skills = [
+  { name: "Penetration Testing", level: 95, color: "#00ff41" },
+  { name: "Network Forensics", level: 92, color: "#00ffff" },
+  { name: "Malware Analysis", level: 88, color: "#00ff41" },
+  { name: "OSINT & Threat Intel", level: 90, color: "#00ffff" },
+  { name: "Cloud Security (AWS/GCP)", level: 85, color: "#00ff41" },
+  { name: "Reverse Engineering", level: 82, color: "#00ffff" },
+  { name: "Exploit Development", level: 87, color: "#00ff41" },
+  { name: "Incident Response", level: 93, color: "#00ffff" },
+];
+
+const projects = [
+  {
+    id: "01",
+    title: "ROGUE_HUNTER",
+    tag: "OFFENSIVE SEC",
+    desc: "Automated red team framework for identifying rogue actors across dark web & clear net infrastructure.",
+    tech: ["Python", "Tor", "YARA", "ELK"],
+    status: "CLASSIFIED",
+  },
+  {
+    id: "02",
+    title: "PHANTOM_TRACE",
+    tag: "FORENSICS",
+    desc: "Deep packet inspection & memory forensics toolkit used in live government investigations.",
+    tech: ["C++", "Wireshark API", "Volatility"],
+    status: "ACTIVE",
+  },
+  {
+    id: "03",
+    title: "SENTINEL_NET",
+    tag: "DEFENSE",
+    desc: "AI-driven threat detection network monitoring 10k+ endpoints with real-time anomaly detection.",
+    tech: ["ML", "Kafka", "Rust", "SIEM"],
+    status: "DEPLOYED",
+  },
+  {
+    id: "04",
+    title: "ZERO_BREACH",
+    tag: "CLOUD SEC",
+    desc: "Zero-trust architecture implementation framework for government cloud infrastructure.",
+    tech: ["Terraform", "AWS", "IAM", "Vault"],
+    status: "ACTIVE",
+  },
+];
+
+const timeline = [
+  {
+    year: "2024–NOW",
+    role: "Head of Cybersecurity",
+    org: "Gov. Collab Division",
+    desc: "Leading offensive + defensive cyber ops in collaboration with national security agencies.",
+  },
+  {
+    year: "2022–2024",
+    role: "Senior Penetration Tester",
+    org: "RedTeam Alpha",
+    desc: "Executed 100+ authorized breach simulations across critical infrastructure.",
+  },
+  {
+    year: "2020–2022",
+    role: "Threat Intelligence Analyst",
+    org: "CyberShield Inc.",
+    desc: "Tracked APT groups, produced threat intel reports for Fortune 500 clients.",
+  },
+];
+
+export default function Home() {
   return (
-    <div className="max-w-2xl space-y-4">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="display-font text-4xl tracking-tight text-white md:text-5xl">{title}</h2>
-      {copy ? <p className="story-copy text-base md:text-lg">{copy}</p> : null}
-    </div>
-  );
-}
+    <main className="relative bg-black min-h-screen text-cyber-green font-mono overflow-x-hidden">
+      {/* Matrix Background */}
+      <MatrixRain />
 
-export default async function HomePage() {
-  const { profile, socialLinks, projects, experiences, posts, settings } = await getPortfolioData();
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
-  const latestPosts = posts.slice(0, 3);
+      {/* ─── NAVBAR ──────────────────────────────────────── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 border-b border-cyber-green/20 bg-black/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 bg-cyber-green rounded-full animate-pulse" />
+          <span className="font-body text-cyber-green font-bold tracking-widest text-sm">
+            CYBER<span className="text-cyber-cyan">SEC</span>
+          </span>
+          <span className="text-cyber-green/30 text-xs">// ONLINE</span>
+        </div>
 
-  return (
-    <main className="noise relative isolate overflow-hidden">
-      <div className="ambient-line absolute inset-0 opacity-40" />
-      <div className="mx-auto max-w-7xl px-5 pb-20 pt-6 md:px-8 lg:px-12">
-        <header className="section-shell sticky top-4 z-30 mb-8 flex items-center justify-between rounded-full px-5 py-3">
-          <Link href="/" className="text-sm font-medium tracking-[0.24em] text-sand uppercase">
-            {profile.name}
-          </Link>
-          <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            <Link href="#projects">Projects</Link>
-            <Link href="#experience">Experience</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="#contact">Contact</Link>
-            <Link
-              href="/admin"
-              className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white"
-            >
-              Admin
-            </Link>
-          </nav>
-        </header>
+        <div className="hidden md:flex items-center gap-8">
+          {["about", "skills", "projects", "timeline", "contact"].map((item) => (
+            <a key={item} href={`#${item}`} className="nav-link">
+              {item}
+            </a>
+          ))}
+        </div>
 
-        <section className="grid gap-8 pb-12 pt-4 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:pb-24">
-          <div className="space-y-8">
-            <span className="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-xs uppercase tracking-[0.26em] text-white/70">
-              {settingValue(settings, "heroBadge", "Available for selected projects in 2026")}
-            </span>
-            <div className="space-y-6">
-              <p className="eyebrow">Portfolio / Product / Identity</p>
-              <h1 className="display-font max-w-4xl text-6xl leading-none md:text-8xl">
-                Build a brand that <span className="gradient-text">looks fearless</span> and ships
-                with substance.
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
-                {profile.tagline} {profile.bio}
+        <div className="flex items-center gap-2 text-xs text-cyber-green/50">
+          <span className="animate-blink">●</span>
+          <span>SECURE_CONN</span>
+        </div>
+      </nav>
+
+      {/* ─── HERO ────────────────────────────────────────── */}
+      <section className="relative z-10 min-h-screen flex items-center justify-center px-8 pt-24">
+        <div className="max-w-5xl w-full">
+          {/* Terminal window */}
+          <div className="terminal-window mb-8">
+            <div className="terminal-header">
+              <div className="terminal-dot bg-cyber-red" />
+              <div className="terminal-dot bg-cyber-yellow" />
+              <div className="terminal-dot bg-cyber-green" />
+              <span className="ml-4 text-xs text-cyber-green/60">
+                root@cybersec:~$ ./identify.sh
+              </span>
+            </div>
+            <div className="p-6 space-y-2">
+              <p className="text-cyber-green/50 text-sm">
+                <span className="text-cyber-cyan">$</span> whoami
+              </p>
+              <p className="text-cyber-green text-sm">
+                ▸ Initializing identity protocol...
+              </p>
+              <p className="text-cyber-green/70 text-sm">
+                ▸ clearance_level: <span className="text-cyber-cyan">TOP_SECRET</span> | status:{" "}
+                <span className="text-cyber-green">ACTIVE</span> | role:{" "}
+                <span className="text-cyber-yellow">HEAD_OF_CYBERSECURITY</span>
               </p>
             </div>
+          </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#projects"
-                className="rounded-full bg-sand px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white"
-              >
-                Explore projects
-              </Link>
-              <Link
-                href="/blog"
-                className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white transition hover:bg-white/10"
-              >
-                Read the writing
-              </Link>
+          {/* Main heading with glitch */}
+          <div className="mb-6">
+            <p className="text-cyber-cyan text-sm tracking-widest mb-4 font-mono">
+              // IDENTITY CONFIRMED
+            </p>
+            <h1
+              className="glitch font-body text-5xl md:text-7xl font-black tracking-wider mb-4"
+              data-text="[YOUR NAME]"
+            >
+              [YOUR NAME]
+            </h1>
+            <div className="text-cyber-cyan font-hacker text-2xl md:text-3xl mt-4 h-10">
+              <TypingText
+                texts={[
+                  "Head of Cybersecurity",
+                  "Rogue Hacker Hunter",
+                  "Penetration Tester",
+                  "Govt. Security Advisor",
+                  "Threat Intelligence Lead",
+                ]}
+              />
+            </div>
+          </div>
+
+          {/* Stats row */}
+          <div className="flex flex-wrap gap-6 mb-10 mt-8">
+            {[
+              { label: "BREACHES STOPPED", value: "200+" },
+              { label: "GOV CLEARANCE", value: "ACTIVE" },
+              { label: "CVEs FOUND", value: "37" },
+              { label: "THREAT ACTORS TRACKED", value: "500+" },
+            ].map((stat) => (
+              <div key={stat.label} className="border border-cyber-green/20 px-4 py-3 bg-cyber-green/5">
+                <div className="text-cyber-green font-body text-xl font-bold neon-text">
+                  {stat.value}
+                </div>
+                <div className="text-cyber-green/40 text-xs tracking-widest mt-1">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            <a href="#projects" className="cyber-btn">
+              View Operations
+            </a>
+            <a href="#contact" className="cyber-btn" style={{ borderColor: "#00ffff", color: "#00ffff" }}>
+              Establish Contact
+            </a>
+          </div>
+        </div>
+
+        {/* Corner decorations */}
+        <div className="absolute top-24 right-8 hidden lg:block text-right">
+          <div className="text-cyber-green/20 text-xs font-mono space-y-1">
+            <p>IP: [REDACTED]</p>
+            <p>PROTO: TLS 1.3</p>
+            <p>CIPHER: AES-256-GCM</p>
+            <p className="text-cyber-green/40">CONN: ENCRYPTED</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── ABOUT ───────────────────────────────────────── */}
+      <section id="about" className="relative z-10 py-28 px-8">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="section-title text-2xl font-body mb-16">About</h2>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="terminal-window">
+              <div className="terminal-header">
+                <div className="terminal-dot bg-cyber-red" />
+                <div className="terminal-dot bg-cyber-yellow" />
+                <div className="terminal-dot bg-cyber-green" />
+                <span className="ml-4 text-xs text-cyber-green/60">bio.txt</span>
+              </div>
+              <div className="p-6 space-y-4 text-sm text-cyber-green/80 leading-relaxed">
+                <p>
+                  <span className="text-cyber-cyan">$</span> cat /etc/about.conf
+                </p>
+                <p>
+                  Elite cybersecurity professional operating at the intersection of{" "}
+                  <span className="text-cyber-green">offensive security</span> and{" "}
+                  <span className="text-cyber-cyan">government intelligence</span>.
+                </p>
+                <p>
+                  Authorized to identify, track, and neutralize rogue hackers. Operating in
+                  official capacity with full government clearance across national cyber defense
+                  programs.
+                </p>
+                <p>
+                  Specializing in{" "}
+                  <span className="text-cyber-yellow">APT attribution</span>,{" "}
+                  <span className="text-cyber-yellow">zero-day research</span>, and{" "}
+                  <span className="text-cyber-yellow">critical infrastructure protection</span>.
+                </p>
+              </div>
             </div>
 
-            <div className="grid gap-4 pt-4 sm:grid-cols-3">
+            <div className="space-y-4">
               {[
-                ["Years shaping products", "4+"],
-                ["Live-ready builds launched", "18"],
-                ["Focus areas", "Web, SaaS, portfolios"]
-              ].map(([label, value]) => (
-                <div key={label} className="section-shell rounded-3xl p-5">
-                  <div className="text-3xl font-semibold text-white">{value}</div>
-                  <div className="mt-2 text-sm text-white/60">{label}</div>
+                { label: "CLEARANCE LEVEL", value: "TOP SECRET / SCI" },
+                { label: "SPECIALIZATION", value: "OFFENSIVE SEC OPS" },
+                { label: "JURISDICTION", value: "NATIONAL + INTERNATIONAL" },
+                { label: "COLLABORATION", value: "GOVERNMENT AGENCIES" },
+                { label: "CERTIFICATION", value: "OSCP | CEH | CISSP | GREM" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex justify-between items-center py-3 border-b border-cyber-green/10 group"
+                >
+                  <span className="text-cyber-green/40 text-xs tracking-widest group-hover:text-cyber-cyan transition-colors">
+                    {item.label}
+                  </span>
+                  <span className="text-cyber-green text-sm font-mono">{item.value}</span>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="section-shell relative overflow-hidden rounded-[2rem] p-5 shadow-glow">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
-            <div className="relative space-y-5">
-              <div className="flex items-center justify-between">
-                <p className="text-sm uppercase tracking-[0.24em] text-white/60">Signal Profile</p>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs text-emerald-200">
-                  {profile.availability ?? "Open to opportunities"}
-                </span>
-              </div>
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={profile.avatarUrl ?? ""} alt={profile.name} className="h-[360px] w-full object-cover" />
-              </div>
-              <div className="space-y-3">
-                <p className="text-2xl font-semibold text-white">{profile.name}</p>
-                <p className="story-copy">{profile.location ?? "Remote / Global"} </p>
-              </div>
-              <div className="grid gap-3">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.id}
-                    href={link.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="card-hover flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
-                  >
-                    <span className="text-white">{link.platform}</span>
-                    <span className="text-sm text-white/60">{link.label}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+      {/* ─── SKILLS ──────────────────────────────────────── */}
+      <section id="skills" className="relative z-10 py-28 px-8 bg-cyber-green/[0.02]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="section-title text-2xl font-body mb-16">Skills</h2>
 
-        <section className="grid gap-6 pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div className="section-shell rounded-[2rem] p-8">
-            {sectionTitle("About", "Sharp engineering with a cinematic pulse.")}
-          </div>
-          <div className="section-shell rounded-[2rem] p-8">
-            <div className="grid gap-6 md:grid-cols-2">
-              <p className="story-copy">
-                I build portfolio systems, SaaS surfaces, and product experiences that carry a clear
-                point of view. The aim is simple: fast sites, convincing storytelling, and backend
-                structure that stays useful after launch.
-              </p>
-              <p className="story-copy">
-                This starter ships with a Vercel-friendly architecture, an editable admin panel,
-                structured content models, and a visual language designed to feel deliberate instead
-                of generic.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="space-y-8 py-14">
-          {sectionTitle(
-            "Featured Work",
-            "Case studies designed to feel premium before a single line is read.",
-            "Each project card carries both product context and visual weight, mirroring the kind of portfolio presence that makes people stop scrolling."
-          )}
-          <div className="grid gap-6 lg:grid-cols-3">
-            {featuredProjects.map((project, index) => (
-              <article
-                key={project.id}
-                className="section-shell card-hover group rounded-[2rem] p-4"
-              >
-                <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={project.imageUrl ?? ""}
-                    alt={project.title}
-                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
+          <div className="grid md:grid-cols-2 gap-8">
+            {skills.map((skill) => (
+              <div key={skill.name} className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-cyber-green/80">{skill.name}</span>
+                  <span className="text-cyber-cyan text-xs">{skill.level}%</span>
+                </div>
+                <div className="skill-bar">
+                  <div
+                    className="skill-bar-fill"
+                    style={{
+                      width: `${skill.level}%`,
+                      background: `linear-gradient(90deg, ${skill.color}, ${skill.color === "#00ff41" ? "#00ffff" : "#00ff41"})`,
+                    }}
                   />
                 </div>
-                <div className="space-y-4 p-4">
-                  <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-white/45">
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <span>{project.stack.slice(0, 2).join(" / ")}</span>
-                  </div>
-                  <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-                  <p className="story-copy">{project.summary}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-3 pt-2 text-sm text-white/80">
-                    {project.liveUrl ? (
-                      <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                        Live
-                      </a>
-                    ) : null}
-                    {project.repoUrl ? (
-                      <a href={project.repoUrl} target="_blank" rel="noreferrer">
-                        Code
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
+              </div>
             ))}
           </div>
-        </section>
 
-        <section id="experience" className="grid gap-8 py-14 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>{sectionTitle("Experience", "A timeline built around shipping real work.")}</div>
-          <div className="space-y-5">
-            {experiences.map((item) => (
-              <article key={item.id} className="section-shell rounded-[2rem] p-6">
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <p className="text-xl font-semibold text-white">{item.role}</p>
-                    <p className="mt-1 text-white/70">{item.company}</p>
-                  </div>
-                  <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/60">
-                    {item.period}
+          {/* Tool badges */}
+          <div className="mt-16">
+            <p className="text-cyber-green/40 text-xs tracking-widest mb-6">// TOOLS & FRAMEWORKS</p>
+            <div className="flex flex-wrap gap-3">
+              {[
+                "Metasploit", "Burp Suite", "Nmap", "Wireshark", "Ghidra",
+                "IDA Pro", "Volatility", "Cobalt Strike", "BloodHound",
+                "Maltego", "Shodan", "YARA", "Splunk", "TheHive",
+              ].map((tool) => (
+                <span
+                  key={tool}
+                  className="px-3 py-1 text-xs border border-cyber-green/20 text-cyber-green/70 hover:border-cyber-green hover:text-cyber-green hover:shadow-cyber-sm transition-all cursor-default"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PROJECTS ────────────────────────────────────── */}
+      <section id="projects" className="relative z-10 py-28 px-8">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="section-title text-2xl font-body mb-16">Operations</h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {projects.map((project) => (
+              <div key={project.id} className="cyber-card p-6 group">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-cyber-cyan/40 font-hacker text-2xl">{project.id}</span>
+                  <span
+                    className={`text-xs px-2 py-1 border tracking-widest ${
+                      project.status === "CLASSIFIED"
+                        ? "border-cyber-red/50 text-cyber-red"
+                        : "border-cyber-green/30 text-cyber-green/60"
+                    }`}
+                  >
+                    {project.status}
                   </span>
                 </div>
-                <p className="story-copy mt-4">{item.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {item.highlights.map((highlight) => (
-                    <span key={highlight} className="rounded-full bg-white/5 px-3 py-1 text-xs text-white/65">
-                      {highlight}
+
+                <div className="text-cyber-cyan text-xs tracking-widest mb-2">{project.tag}</div>
+                <h3 className="font-body text-cyber-green text-lg font-bold mb-3 group-hover:neon-text">
+                  {project.title}
+                </h3>
+                <p className="text-cyber-green/60 text-sm mb-4 leading-relaxed">{project.desc}</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span key={t} className="text-xs text-cyber-cyan/60 border border-cyber-cyan/20 px-2 py-0.5">
+                      {t}
                     </span>
                   ))}
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="grid gap-8 py-14 lg:grid-cols-[1fr_0.9fr]">
-          <div className="section-shell rounded-[2rem] p-8">
-            {sectionTitle(
-              "Writing",
-              "Thoughtful notes on frontend systems, product craft, and digital presence."
-            )}
-          </div>
-          <div className="space-y-4">
-            {latestPosts.map((post) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.slug}`}
-                className="section-shell card-hover block rounded-[2rem] p-6"
-              >
-                <p className="eyebrow">Journal / {post.publishedAt?.getFullYear() ?? "Draft"}</p>
-                <h3 className="mt-3 text-2xl font-semibold text-white">{post.title}</h3>
-                <p className="mt-3 story-copy">{post.excerpt}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section id="contact" className="py-14">
-          <div className="section-shell rounded-[2.4rem] p-8 md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-end">
-              <div className="space-y-4">
-                <p className="eyebrow">Contact</p>
-                <h2 className="display-font max-w-3xl text-4xl text-white md:text-6xl">
-                  {settingValue(settings, "contactHeadline", "Let us build something unforgettable.")}
-                </h2>
-                <p className="max-w-2xl text-lg leading-8 text-white/70">
-                  Whether you want a striking portfolio, a refined product surface, or a launch-ready
-                  full-stack app, this starter is set up to get you there fast.
-                </p>
               </div>
-              <div className="flex flex-col gap-4 lg:items-end">
-                <a
-                  href={`mailto:${profile.contactEmail}`}
-                  className="rounded-full bg-sand px-6 py-3 text-sm font-semibold text-ink"
-                >
-                  {profile.contactEmail}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── TIMELINE ────────────────────────────────────── */}
+      <section id="timeline" className="relative z-10 py-28 px-8 bg-cyber-green/[0.02]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="section-title text-2xl font-body mb-16">Timeline</h2>
+
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-cyber-green/20" />
+
+            <div className="space-y-12 pl-10">
+              {timeline.map((item, i) => (
+                <div key={i} className="relative">
+                  {/* Dot */}
+                  <div className="absolute -left-[42px] top-1 w-3 h-3 border border-cyber-green bg-black">
+                    <div className="w-full h-full bg-cyber-green/40 animate-pulse" />
+                  </div>
+
+                  <div className="text-cyber-cyan text-xs tracking-widest mb-1">{item.year}</div>
+                  <h3 className="font-body text-cyber-green font-bold text-lg">{item.role}</h3>
+                  <div className="text-cyber-green/40 text-xs tracking-wider mb-2">{item.org}</div>
+                  <p className="text-cyber-green/60 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CONTACT ─────────────────────────────────────── */}
+      <section id="contact" className="relative z-10 py-28 px-8">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="section-title text-2xl font-body mb-6 mx-auto">Contact</h2>
+          <p className="text-cyber-green/40 text-sm mt-10 mb-12 tracking-widest">
+            // SECURE CHANNEL — ENCRYPTED COMMS ONLY
+          </p>
+
+          <div className="terminal-window">
+            <div className="terminal-header">
+              <div className="terminal-dot bg-cyber-red" />
+              <div className="terminal-dot bg-cyber-yellow" />
+              <div className="terminal-dot bg-cyber-green" />
+              <span className="ml-4 text-xs text-cyber-green/60">contact.sh</span>
+            </div>
+            <div className="p-8 space-y-6">
+              <div className="space-y-4 text-left">
+                {[
+                  { label: "EMAIL", value: "your@email.com", icon: ">" },
+                  { label: "LINKEDIN", value: "linkedin.com/in/yourname", icon: ">" },
+                  { label: "GITHUB", value: "github.com/Charitardha555", icon: ">" },
+                  { label: "PGP KEY", value: "0x[YOUR_PGP_KEY]", icon: ">" },
+                ].map((contact) => (
+                  <div key={contact.label} className="flex gap-4 items-center text-sm border-b border-cyber-green/10 pb-3">
+                    <span className="text-cyber-cyan w-24 text-xs tracking-widest flex-shrink-0">
+                      {contact.icon} {contact.label}
+                    </span>
+                    <span className="text-cyber-green/80">{contact.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 flex flex-wrap gap-4 justify-center">
+                <a href="mailto:your@email.com" className="cyber-btn text-sm">
+                  Send Encrypted Mail
                 </a>
-                {profile.resumeUrl ? (
-                  <a
-                    href={profile.resumeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-full border border-white/15 px-6 py-3 text-sm text-white"
-                  >
-                    View resume
-                  </a>
-                ) : null}
+                <a
+                  href="https://github.com/Charitardha555"
+                  className="cyber-btn text-sm"
+                  style={{ borderColor: "#00ffff", color: "#00ffff" }}
+                >
+                  GitHub Profile
+                </a>
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ──────────────────────────────────────── */}
+      <footer className="relative z-10 border-t border-cyber-green/10 py-8 px-8">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <span className="text-cyber-green/20 text-xs font-mono tracking-widest">
+            // ALL ACTIVITIES AUTHORIZED & MONITORED
+          </span>
+          <span className="text-cyber-green/20 text-xs">
+            © {new Date().getFullYear()} — CYBERSEC DIVISION
+          </span>
+          <div className="flex items-center gap-2 text-xs text-cyber-green/30">
+            <span className="animate-blink">●</span>
+            <span>SYSTEM ONLINE</span>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
