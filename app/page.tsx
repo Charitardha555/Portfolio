@@ -84,7 +84,7 @@ export default function Home() {
           <span className="text-white/10 text-xs tracking-widest">// ONLINE</span>
         </div>
         <div className="hidden md:flex items-center gap-10">
-          {["about", "skills", "projects", "timeline", "contact"].map((item) => (
+          {["about", "skills", "projects", "timeline", "contact", "Admin"].map((item) => (
             <a key={item} href={"#" + item} className="nav-link-v2">{item}</a>
           ))}
         </div>
