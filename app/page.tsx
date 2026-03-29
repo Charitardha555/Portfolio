@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 
 const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: false });
