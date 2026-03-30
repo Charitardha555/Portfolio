@@ -18,26 +18,23 @@ interface ClientHeroProps {
 export default function ClientHero({ name, roles }: ClientHeroProps) {
   return (
     <>
-      {/* Matrix Rain */}
       <MatrixRain />
-
-      {/* Hex stream decoration */}
       <div className="hex-stream" aria-hidden="true">
         {Array.from({ length: 120 }).map((_, i) => (
           <span key={i}>{hexRow()}</span>
         ))}
       </div>
-
-      {/* Glitch name */}
       <h1
         className="glitch-name text-5xl md:text-8xl font-black tracking-tight mb-4"
         data-text={name}
+        style={{ position: "absolute", top: "42%", left: "2rem", zIndex: 10 }}
       >
         {name}
       </h1>
-
-      {/* Typing roles */}
-      <div className="mt-4 mb-10 flex items-center gap-3">
+      <div
+        className="flex items-center gap-3"
+        style={{ position: "absolute", top: "56%", left: "2rem", zIndex: 10 }}
+      >
         <span className="glow-cyan text-xs tracking-widest">//</span>
         <span
           className="font-hacker text-2xl md:text-3xl"
