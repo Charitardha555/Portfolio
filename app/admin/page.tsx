@@ -356,7 +356,7 @@ export default async function Home() {
 
       {/* ══════════════════════════════════════
           PROJECTS
-      ══════════════════════════════════════ */}
+     ══════════════════════════════════════ */}
       <section id="projects" className="relative z-10 py-28 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs tracking-widest mb-2" style={{ color: "rgba(255,153,0,0.4)" }}>// SECTION_03</p>
