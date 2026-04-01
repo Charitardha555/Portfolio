@@ -98,12 +98,9 @@ export default async function Home() {
         </div>
       </nav>
 
-      {/* ══════════════════════════════════════
-          HERO
-      ══════════════════════════════════════ */}
+      {/* HERO */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-8 pt-24">
 
-        {/* Client-side animations (matrix + typing) */}
         <ClientHero name={name} roles={roles} />
 
         <div className="max-w-5xl w-full relative z-10">
@@ -112,7 +109,6 @@ export default async function Home() {
           {image && (
             <div className="absolute -top-8 right-0 hidden xl:block">
               <div className="relative">
-                {/* Neon ring */}
                 <div
                   className="absolute inset-0 rounded-full animate-pulse"
                   style={{ boxShadow: "0 0 20px #00ff41, 0 0 40px #00ff41", borderRadius: "50%" }}
@@ -125,14 +121,12 @@ export default async function Home() {
                   className="rounded-full object-cover relative z-10"
                   style={{ border: "2px solid #00ff41" }}
                 />
-                {/* Corner brackets around photo */}
                 <div className="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2" style={{ borderColor: "#00ffff" }} />
                 <div className="absolute -top-2 -right-2 w-5 h-5 border-t-2 border-r-2" style={{ borderColor: "#00ffff" }} />
                 <div className="absolute -bottom-2 -left-2 w-5 h-5 border-b-2 border-l-2" style={{ borderColor: "#00ffff" }} />
                 <div className="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2" style={{ borderColor: "#00ffff" }} />
               </div>
             </div>
-          </div>
           )}
 
           {/* Boot sequence */}
@@ -183,7 +177,7 @@ export default async function Home() {
             </div>
           )}
 
-          {/* CTA */}
+          {/* CTA – fixed block */}
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="#projects"
@@ -203,8 +197,8 @@ export default async function Home() {
               }}
             >
               [VIEW_OPERATIONS]
-            
-          
+            </a>
+
             <a
               href="#contact"
               className="px-6 py-3 text-sm tracking-widest border transition-all duration-300 rounded"
@@ -222,17 +216,17 @@ export default async function Home() {
             </a>
           </div>
 
-        {/* Right side data stream */}
-        <div
-          className="absolute top-32 right-8 hidden xl:block data-stream text-right"
-          style={{ color: "#00ffff" }}
-        >
-          {["SYS.BOOT: OK","FW: 9.1.7","IDS: ACTIVE","ENCRYPT: AES-256",
-            "VPN: CONNECTED","FIREWALL: UP","AUDIT: ON","AUTH: 2FA","UPTIME: 99.98%"].map((l) => (
-            <div key={l}>{l}</div>
-          ))}
+          {/* Right side data stream */}
+          <div
+            className="absolute top-32 right-8 hidden xl:block data-stream text-right"
+            style={{ color: "#00ffff" }}
+          >
+            {["SYS.BOOT: OK","FW: 9.1.7","IDS: ACTIVE","ENCRYPT: AES-256",
+              "VPN: CONNECTED","FIREWALL: UP","AUDIT: ON","AUTH: 2FA","UPTIME: 99.98%"].map((l) => (
+              <div key={l}>{l}</div>
+            ))}
+          </div>
         </div>
-
       </section>
 
       {/* ══════════════════════════════════════
