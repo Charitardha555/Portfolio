@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
-import ClientHero from "../components/ClientHero.tsx";
+import ClientHero from "../components/ClientHero";
 
 export const revalidate = 60;
 
