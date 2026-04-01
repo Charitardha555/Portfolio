@@ -3,8 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 
-const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: false });
-const TypingText = dynamic(() => import("../components/TypingText"), { ssr: false });
+import ClientHero from "../components/ClientHero";
 
 export const revalidate = 60;
 
