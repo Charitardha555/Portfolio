@@ -1,51 +1,51 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface TypingTextProps {
-  texts: string[];
-  speed?: number;
-  deleteSpeed?: number;
+  phrases: string[];
+  typingSpeed?: number;
+  deletingSpeed?: number;
   pauseTime?: number;
   className?: string;
 }
 
 export default function TypingText({
-  texts,
-  speed = 80,
-  deleteSpeed = 40,
+  phrases,
+  typingSpeed = 80,
+  deletingSpeed = 40,
   pauseTime = 2000,
   className = "",
 }: TypingTextProps) {
   const [displayed, setDisplayed] = useState("");
-  const [index, setIndex] = useState(0);
+  const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const current = texts[index % texts.length];
-    let timeout: ReturnType<typeof setTimeout>;
+    const current = phrases[phraseIndex];
+    let timeout: NodeJS.Timeout;
 
     if (!isDeleting && displayed === current) {
       timeout = setTimeout(() => setIsDeleting(true), pauseTime);
     } else if (isDeleting && displayed === "") {
       setIsDeleting(false);
-      setIndex((i) => i + 1);
+      setPhraseIndex((i) => (i + 1) % phrases.length);
     } else {
       timeout = setTimeout(() => {
         setDisplayed(
           isDeleting
-            ? current.substring(0, displayed.length - 1)
-            : current.substring(0, displayed.length + 1)
+            ? current.slice(0, displayed.length - 1)
+            : current.slice(0, displayed.length + 1)
         );
-      }, isDeleting ? deleteSpeed : speed);
+      }, isDeleting ? deletingSpeed : typingSpeed);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, index, texts, speed, deleteSpeed, pauseTime]);
+  }, [displayed, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
     <span className={className}>
       {displayed}
-      <span className="animate-blink text-cyber-green">█</span>
+      <span className="cursor-blink text-neon-green">█</span>
     </span>
   );
 }
