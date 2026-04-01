@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: false });
-const TypingText = dynamic(() => import("../components/TypingText"), { ssr: false });
+const MatrixRain = dynamic(() => import("../components/MatrixRain"));
+const TypingText = dynamic(() => import("../components/TypingText"));
 
 const skills = [
   { name: "Threat Hunting", level: 95, color: "#00ff41" },
