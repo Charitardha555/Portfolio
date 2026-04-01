@@ -17,23 +17,25 @@ export default async function HomePage() {
   const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
   const latestPosts = posts.slice(0, 3);
   const text = (key: string, fallback: string) => settingValue(settings, key, fallback);
+  const signalTags = ["CYBER OPS", "TERMINAL UI", "SECURE SYSTEMS", "THREAT-READY BUILD"];
 
   return (
-    <main className="noise relative isolate overflow-hidden">
+    <main className="noise cyber-home relative isolate overflow-hidden">
       <div className="ambient-line absolute inset-0 opacity-40" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(0,255,65,0.15),transparent_38%),radial-gradient(circle_at_82%_12%,rgba(0,212,255,0.16),transparent_34%),radial-gradient(circle_at_78%_86%,rgba(191,0,255,0.12),transparent_38%)]" />
       <div className="mx-auto max-w-7xl px-5 pb-20 pt-6 md:px-8 lg:px-12">
-        <header className="section-shell sticky top-4 z-30 mb-8 flex items-center justify-between rounded-full px-5 py-3">
+        <header className="section-shell sticky top-4 z-30 mb-8 flex items-center justify-between rounded-full border border-white/10 bg-black/45 px-5 py-3 backdrop-blur">
           <Link href="/" className="text-sm font-medium tracking-[0.24em] text-sand uppercase">
             {profile.name}
           </Link>
           <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            <Link href="#projects">Projects</Link>
-            <Link href="#experience">Experience</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="#contact">Contact</Link>
+            <Link className="transition hover:text-[#00ff41]" href="#projects">Projects</Link>
+            <Link className="transition hover:text-[#00d4ff]" href="#experience">Experience</Link>
+            <Link className="transition hover:text-[#bf00ff]" href="/blog">Blog</Link>
+            <Link className="transition hover:text-[#ff9f1c]" href="#contact">Contact</Link>
             <Link
               href="/admin"
-              className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white"
+              className="rounded-full border border-[#00ff41]/40 bg-[#00ff41]/10 px-4 py-2 text-[#c9ffd8] transition hover:bg-[#00ff41]/20"
             >
               Admin
             </Link>
@@ -47,26 +49,33 @@ export default async function HomePage() {
             </span>
             <div className="space-y-6">
               <p className="eyebrow">{text("heroEyebrow", "Portfolio / Product / Identity")}</p>
-              <h1 className="display-font max-w-4xl text-6xl leading-none md:text-8xl">
-                {text("heroTitlePrefix", "Build a brand that")}{" "}
-                <span className="gradient-text">{text("heroTitleHighlight", "looks fearless")}</span>{" "}
-                {text("heroTitleSuffix", "and ships with substance.")}
+              <h1 className="display-font max-w-4xl text-6xl leading-[0.95] md:text-8xl">
+                <span className="text-white">{text("heroTitlePrefix", "Build a brand that")}</span>{" "}
+                <span className="cyber-accent-green">{text("heroTitleHighlight", "looks fearless")}</span>{" "}
+                <span className="cyber-accent-cyan">{text("heroTitleSuffix", "and ships with substance.")}</span>
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
                 {profile.tagline} {profile.bio}
               </p>
+              <div className="flex flex-wrap gap-2">
+                {signalTags.map((tag, index) => (
+                  <span key={tag} className={`cyber-chip cyber-chip-${index % 4}`}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-4">
               <Link
                 href={text("heroPrimaryCta", "#projects")}
-                className="rounded-full bg-sand px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white"
+                className="rounded-full border border-[#00ff41]/45 bg-[#00ff41]/15 px-6 py-3 text-sm font-semibold text-[#d6ffe2] transition hover:bg-[#00ff41]/25"
               >
                 {text("heroPrimaryCtaLabel", "Explore projects")}
               </Link>
               <Link
                 href={text("heroSecondaryCta", "/blog")}
-                className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white transition hover:bg-white/10"
+                className="rounded-full border border-[#00d4ff]/45 bg-[#00d4ff]/10 px-6 py-3 text-sm text-[#d7f8ff] transition hover:bg-[#00d4ff]/20"
               >
                 {text("heroSecondaryCtaLabel", "Read the writing")}
               </Link>
@@ -78,19 +87,19 @@ export default async function HomePage() {
                 [text("heroStatTwoLabel", "Live-ready builds launched"), text("heroStatTwoValue", "18")],
                 [text("heroStatThreeLabel", "Focus areas"), text("heroStatThreeValue", "Web, SaaS, portfolios")]
               ].map(([label, value]) => (
-                <div key={label} className="section-shell rounded-3xl p-5">
-                  <div className="text-3xl font-semibold text-white">{value}</div>
+                <div key={label} className="section-shell cyber-stat-card rounded-3xl p-5">
+                  <div className="text-3xl font-semibold text-white cyber-accent-purple">{value}</div>
                   <div className="mt-2 text-sm text-white/60">{label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="section-shell relative overflow-hidden rounded-[2rem] p-5 shadow-glow">
+          <div className="section-shell cyber-panel relative overflow-hidden rounded-[2rem] p-5 shadow-glow">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
             <div className="relative space-y-5">
               <div className="flex items-center justify-between">
-                <p className="text-sm uppercase tracking-[0.24em] text-white/60">Signal Profile</p>
+                <p className="text-sm uppercase tracking-[0.24em] text-[#9adfff]">Signal Profile</p>
                 <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs text-emerald-200">
                   {profile.availability ?? "Open to opportunities"}
                 </span>
@@ -110,7 +119,7 @@ export default async function HomePage() {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="card-hover flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                    className="card-hover flex items-center justify-between rounded-2xl border border-white/10 bg-black/35 px-4 py-3 transition hover:border-[#00d4ff]/45"
                   >
                     <span className="text-white">{link.platform}</span>
                     <span className="text-sm text-white/60">{link.label}</span>
@@ -146,7 +155,7 @@ export default async function HomePage() {
             {featuredProjects.map((project, index) => (
               <article
                 key={project.id}
-                className="section-shell card-hover group rounded-[2rem] p-4"
+                className="section-shell cyber-card card-hover group rounded-[2rem] p-4"
               >
                 <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -227,7 +236,7 @@ export default async function HomePage() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className="section-shell card-hover block rounded-[2rem] p-6"
+                className="section-shell cyber-card card-hover block rounded-[2rem] p-6"
               >
                 <p className="eyebrow">Journal / {post.publishedAt?.getFullYear() ?? "Draft"}</p>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{post.title}</h3>

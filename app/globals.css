@@ -12,6 +12,12 @@
   --neon-green: #00ff41;
   --neon-cyan: #00d4ff;
   --neon-purple: #bf00ff;
+  --green: #00ff41;
+  --cyan: #00d4ff;
+  --purple: #bf00ff;
+  --red: #ff3b6b;
+  --orange: #ff9f1c;
+  --yellow: #f7f779;
   --dark-bg: #0a0a0f;
   --darker-bg: #050508;
   --card-bg: rgba(0, 255, 65, 0.03);
@@ -462,3 +468,69 @@ body::after {
   50% { opacity: 0; }
 }
 .animate-blink { animation: blink 1s step-end infinite; }
+
+/* Home + admin polish */
+.cyber-home .eyebrow {
+  color: rgba(159, 255, 184, 0.9);
+  letter-spacing: 0.2em;
+}
+.cyber-accent-green {
+  color: #00ff41;
+  text-shadow: 0 0 14px rgba(0, 255, 65, 0.4);
+}
+.cyber-accent-cyan {
+  color: #00d4ff;
+  text-shadow: 0 0 14px rgba(0, 212, 255, 0.35);
+}
+.cyber-accent-purple {
+  color: #d99bff;
+}
+.cyber-chip {
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  background: rgba(0, 0, 0, 0.38);
+}
+.cyber-chip-0 { color: #8dffae; border-color: rgba(0, 255, 65, 0.4); }
+.cyber-chip-1 { color: #99ecff; border-color: rgba(0, 212, 255, 0.45); }
+.cyber-chip-2 { color: #d8adff; border-color: rgba(191, 0, 255, 0.45); }
+.cyber-chip-3 { color: #ffd8a1; border-color: rgba(255, 159, 28, 0.45); }
+.cyber-panel {
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  background: linear-gradient(180deg, rgba(8, 14, 20, 0.75), rgba(5, 7, 10, 0.82));
+}
+.cyber-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(10, 11, 16, 0.82), rgba(5, 6, 9, 0.92));
+}
+.cyber-card:hover {
+  border-color: rgba(0, 212, 255, 0.38);
+}
+.cyber-stat-card {
+  background: linear-gradient(180deg, rgba(0, 255, 65, 0.09), rgba(6, 9, 12, 0.7));
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.admin-shell {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(0, 255, 65, 0.12), transparent 30%),
+    radial-gradient(circle at 88% 8%, rgba(0, 212, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #070b11 0%, #05070b 100%);
+}
+.admin-shell .section-shell {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(5, 9, 15, 0.72);
+  backdrop-filter: blur(8px);
+}
+.admin-shell input,
+.admin-shell textarea {
+  border-color: rgba(125, 219, 255, 0.2) !important;
+  background: rgba(6, 13, 19, 0.7) !important;
+}
+.admin-shell input:focus,
+.admin-shell textarea:focus {
+  border-color: rgba(0, 212, 255, 0.55) !important;
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.35);
+}

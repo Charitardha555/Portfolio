@@ -71,10 +71,10 @@ export default async function AdminPage() {
 
   if (!session) {
     return (
-      <main className="noise min-h-screen">
+      <main className="noise admin-shell min-h-screen">
         <div className="mx-auto flex min-h-screen max-w-5xl items-center px-5 py-10 md:px-8">
-          <section className="section-shell w-full rounded-[2.5rem] p-8 md:p-12">
-            <p className="eyebrow">Admin</p>
+          <section className="section-shell w-full rounded-[2.5rem] border border-[#00ff41]/25 bg-black/55 p-8 md:p-12">
+            <p className="eyebrow text-[#a2ffbc]">Admin Console</p>
             <h1 className="display-font mt-4 max-w-3xl text-5xl text-white md:text-7xl">
               Private editing access powered by Google.
             </h1>
@@ -99,10 +99,10 @@ export default async function AdminPage() {
 
   if (!authorized) {
     return (
-      <main className="noise min-h-screen">
+      <main className="noise admin-shell min-h-screen">
         <div className="mx-auto flex min-h-screen max-w-5xl items-center px-5 py-10 md:px-8">
-          <section className="section-shell w-full rounded-[2.5rem] p-8 md:p-12">
-            <p className="eyebrow">Access denied</p>
+          <section className="section-shell w-full rounded-[2.5rem] border border-[#ff577f]/35 bg-black/55 p-8 md:p-12">
+            <p className="eyebrow text-[#ffc2d0]">Access denied</p>
             <h1 className="display-font mt-4 max-w-3xl text-5xl text-white md:text-7xl">
               This Google account is not allowed into the admin space.
             </h1>
@@ -126,19 +126,29 @@ export default async function AdminPage() {
   }
 
   const data = await getAdminData();
+  const metrics = [
+    { label: "Projects", value: data.projects.length, color: "text-[#00ff41]" },
+    { label: "Posts", value: data.posts.length, color: "text-[#00d4ff]" },
+    { label: "Experience", value: data.experiences.length, color: "text-[#bf00ff]" },
+    { label: "Settings", value: data.settings.length, color: "text-[#ff9f1c]" }
+  ];
 
   return (
-    <main className="noise min-h-screen">
+    <main className="noise admin-shell min-h-screen">
       <div className="mx-auto max-w-7xl px-5 py-8 md:px-8">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="eyebrow">Admin Dashboard</p>
-            <h1 className="display-font mt-3 text-5xl text-white md:text-6xl">Manage your site</h1>
+            <p className="eyebrow text-[#98ffd6]">Admin Dashboard</p>
+            <h1 className="display-font mt-3 text-5xl text-white md:text-6xl">
+              <span className="text-[#caffd8]">Manage</span>{" "}
+              <span className="text-[#79e8ff]">your</span>{" "}
+              <span className="text-[#d8adff]">site</span>
+            </h1>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/"
-              className="inline-flex items-center rounded-full border border-white/15 px-5 py-3 text-sm text-white/80"
+              className="inline-flex items-center rounded-full border border-[#00ff41]/35 bg-[#00ff41]/10 px-5 py-3 text-sm text-[#d3ffdf] transition hover:bg-[#00ff41]/20"
             >
               View portfolio
             </Link>
@@ -146,8 +156,17 @@ export default async function AdminPage() {
           </div>
         </div>
 
+        <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((metric) => (
+            <div key={metric.label} className="rounded-2xl border border-white/10 bg-black/45 p-4 backdrop-blur">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/55">{metric.label}</p>
+              <p className={`mt-2 text-3xl font-semibold ${metric.color}`}>{metric.value}</p>
+            </div>
+          ))}
+        </div>
+
         {!hasDb || !data.persistent ? (
-          <div className="mb-6 rounded-[1.8rem] border border-amber-300/20 bg-amber-300/10 px-5 py-4 text-sm text-amber-100">
+          <div className="mb-6 rounded-[1.8rem] border border-amber-300/35 bg-amber-300/15 px-5 py-4 text-sm text-amber-100">
             `DATABASE_URL` is not configured yet, so the dashboard is showing starter content only.
             Add your database and run Prisma setup before expecting persistent edits.
           </div>
