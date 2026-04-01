@@ -132,7 +132,7 @@ export default async function Home() {
                 <div className="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2" style={{ borderColor: "#00ffff" }} />
               </div>
             </div>
-          </section>
+          </div>
           )}
 
           {/* Boot sequence */}
