@@ -5,6 +5,22 @@ import dynamic from "next/dynamic";
 const MatrixRain = dynamic(() => import("./MatrixRain"), { ssr: false });
 const TypingText = dynamic(() => import("./TypingText"), { ssr: false });
 
+export default function ClientHero() {
+  return (
+    <>
+      <MatrixRain />
+      <TypingText />
+    </>
+  );
+}
+
+"use client";
+
+import dynamic from "next/dynamic";
+
+const MatrixRain = dynamic(() => import("./MatrixRain"), { ssr: false });
+const TypingText = dynamic(() => import("./TypingText"), { ssr: false });
+
 const hexRow = () =>
   Array.from({ length: 12 })
     .map(() => Math.floor(Math.random() * 256).toString(16).padStart(2, "0").toUpperCase())
