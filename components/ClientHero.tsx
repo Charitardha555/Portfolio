@@ -2,22 +2,6 @@
 
 import dynamic from "next/dynamic";
 
-const MatrixRain = dynamic(() => import("./MatrixRain"));
-const TypingText = dynamic(() => import("./TypingText"));
-
-export default function ClientHero() {
-  return (
-    <>
-      <MatrixRain />
-      <TypingText />
-    </>
-  );
-}
-
-"use client";
-
-import dynamic from "next/dynamic";
-
 const MatrixRain = dynamic(() => import("./MatrixRain"), { ssr: false });
 const TypingText = dynamic(() => import("./TypingText"), { ssr: false });
 
@@ -56,7 +40,7 @@ export default function ClientHero({ name, roles }: ClientHeroProps) {
           className="font-hacker text-2xl md:text-3xl"
           style={{ color: "#00ffff", textShadow: "0 0 8px #00ffff" }}
         >
-          <TypingText texts={roles} />
+          <TypingText phrases={roles} />
         </span>
       </div>
     </>
