@@ -146,7 +146,7 @@ export default function HomePage() {
           </div>
           <div className="flex items-center gap-1">
             {navItems.map((item) => (
-              
+              <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 onClick={() => setActiveSection(item)}
