@@ -145,6 +145,178 @@ export const defaultSettings: SiteSetting[] = [
     value: "Let us build something unforgettable.",
     createdAt: new Date(),
     updatedAt: new Date()
+  },
+  {
+    id: "setting-heroEyebrow",
+    key: "heroEyebrow",
+    value: "Portfolio / Product / Identity",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroTitlePrefix",
+    key: "heroTitlePrefix",
+    value: "Build a brand that",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroTitleHighlight",
+    key: "heroTitleHighlight",
+    value: "looks fearless",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroTitleSuffix",
+    key: "heroTitleSuffix",
+    value: "and ships with substance.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroPrimaryCtaLabel",
+    key: "heroPrimaryCtaLabel",
+    value: "Explore projects",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroSecondaryCtaLabel",
+    key: "heroSecondaryCtaLabel",
+    value: "Read the writing",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatOneLabel",
+    key: "heroStatOneLabel",
+    value: "Years shaping products",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatOneValue",
+    key: "heroStatOneValue",
+    value: "4+",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatTwoLabel",
+    key: "heroStatTwoLabel",
+    value: "Live-ready builds launched",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatTwoValue",
+    key: "heroStatTwoValue",
+    value: "18",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatThreeLabel",
+    key: "heroStatThreeLabel",
+    value: "Focus areas",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-heroStatThreeValue",
+    key: "heroStatThreeValue",
+    value: "Web, SaaS, portfolios",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-aboutEyebrow",
+    key: "aboutEyebrow",
+    value: "About",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-aboutTitle",
+    key: "aboutTitle",
+    value: "Sharp engineering with a cinematic pulse.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-aboutParagraphOne",
+    key: "aboutParagraphOne",
+    value:
+      "I build portfolio systems, SaaS surfaces, and product experiences that carry a clear point of view. The aim is simple: fast sites, convincing storytelling, and backend structure that stays useful after launch.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-aboutParagraphTwo",
+    key: "aboutParagraphTwo",
+    value:
+      "This starter ships with a Vercel-friendly architecture, an editable admin panel, structured content models, and a visual language designed to feel deliberate instead of generic.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-projectsEyebrow",
+    key: "projectsEyebrow",
+    value: "Featured Work",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-projectsTitle",
+    key: "projectsTitle",
+    value: "Case studies designed to feel premium before a single line is read.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-projectsCopy",
+    key: "projectsCopy",
+    value:
+      "Each project card carries both product context and visual weight, mirroring the kind of portfolio presence that makes people stop scrolling.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-experienceEyebrow",
+    key: "experienceEyebrow",
+    value: "Experience",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-experienceTitle",
+    key: "experienceTitle",
+    value: "A timeline built around shipping real work.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-writingEyebrow",
+    key: "writingEyebrow",
+    value: "Writing",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-writingTitle",
+    key: "writingTitle",
+    value: "Thoughtful notes on frontend systems, product craft, and digital presence.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: "setting-contactCopy",
+    key: "contactCopy",
+    value:
+      "Whether you want a striking portfolio, a refined product surface, or a launch-ready full-stack app, this starter is set up to get you there fast.",
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 

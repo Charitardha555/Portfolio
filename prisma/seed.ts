@@ -129,7 +129,47 @@ async function main() {
       { key: "heroBadge", value: "Available for selected projects in 2026" },
       { key: "heroPrimaryCta", value: "#projects" },
       { key: "heroSecondaryCta", value: "/blog" },
-      { key: "contactHeadline", value: "Let us build something unforgettable." }
+      { key: "contactHeadline", value: "Let us build something unforgettable." },
+      { key: "heroEyebrow", value: "Portfolio / Product / Identity" },
+      { key: "heroTitlePrefix", value: "Build a brand that" },
+      { key: "heroTitleHighlight", value: "looks fearless" },
+      { key: "heroTitleSuffix", value: "and ships with substance." },
+      { key: "heroPrimaryCtaLabel", value: "Explore projects" },
+      { key: "heroSecondaryCtaLabel", value: "Read the writing" },
+      { key: "heroStatOneLabel", value: "Years shaping products" },
+      { key: "heroStatOneValue", value: "4+" },
+      { key: "heroStatTwoLabel", value: "Live-ready builds launched" },
+      { key: "heroStatTwoValue", value: "18" },
+      { key: "heroStatThreeLabel", value: "Focus areas" },
+      { key: "heroStatThreeValue", value: "Web, SaaS, portfolios" },
+      { key: "aboutEyebrow", value: "About" },
+      { key: "aboutTitle", value: "Sharp engineering with a cinematic pulse." },
+      {
+        key: "aboutParagraphOne",
+        value:
+          "I build portfolio systems, SaaS surfaces, and product experiences that carry a clear point of view. The aim is simple: fast sites, convincing storytelling, and backend structure that stays useful after launch."
+      },
+      {
+        key: "aboutParagraphTwo",
+        value:
+          "This starter ships with a Vercel-friendly architecture, an editable admin panel, structured content models, and a visual language designed to feel deliberate instead of generic."
+      },
+      { key: "projectsEyebrow", value: "Featured Work" },
+      { key: "projectsTitle", value: "Case studies designed to feel premium before a single line is read." },
+      {
+        key: "projectsCopy",
+        value:
+          "Each project card carries both product context and visual weight, mirroring the kind of portfolio presence that makes people stop scrolling."
+      },
+      { key: "experienceEyebrow", value: "Experience" },
+      { key: "experienceTitle", value: "A timeline built around shipping real work." },
+      { key: "writingEyebrow", value: "Writing" },
+      { key: "writingTitle", value: "Thoughtful notes on frontend systems, product craft, and digital presence." },
+      {
+        key: "contactCopy",
+        value:
+          "Whether you want a striking portfolio, a refined product surface, or a launch-ready full-stack app, this starter is set up to get you there fast."
+      }
     ],
     skipDuplicates: true
   });

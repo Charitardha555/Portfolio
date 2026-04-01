@@ -1,486 +1,276 @@
-"use client";
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const MatrixRain = dynamic(() => import("../components/MatrixRain"));
-const TypingText = dynamic(() => import("../components/TypingText"));
+import { getPortfolioData, settingValue } from "@/lib/site-data";
 
-const skills = [
-  { name: "Threat Hunting", level: 95, color: "#00ff41" },
-  { name: "Penetration Testing", level: 92, color: "#00ff41" },
-  { name: "Digital Forensics", level: 90, color: "#00d4ff" },
-  { name: "Red Team Ops", level: 88, color: "#00d4ff" },
-  { name: "Malware Analysis", level: 85, color: "#bf00ff" },
-  { name: "OSINT & Recon", level: 93, color: "#00ff41" },
-  { name: "Incident Response", level: 91, color: "#00d4ff" },
-  { name: "Python / Scripting", level: 87, color: "#bf00ff" },
-];
-
-const projects = [
-  {
-    title: "STELLA — AI Field Assistant",
-    desc: "Offline AI assistant on Raspberry Pi 4 with OLED display, espeak-ng TTS, and Ollama LLM backend. Built for field ops without internet dependency.",
-    tags: ["Python", "Raspberry Pi", "Ollama", "OLED"],
-    status: "DEPLOYED",
-    color: "#00ff41",
-  },
-  {
-    title: "Threat Intelligence Pipeline",
-    desc: "Automated threat feed aggregation and IOC correlation engine used in collaboration with government cyber units for tracking APT activity.",
-    tags: ["Python", "OSINT", "MITRE ATT&CK", "Splunk"],
-    status: "CLASSIFIED",
-    color: "#00d4ff",
-  },
-  {
-    title: "Red Team C2 Framework",
-    desc: "Custom command-and-control infrastructure for authorized red team engagements. Includes evasion techniques and beacon obfuscation.",
-    tags: ["C2", "Red Team", "Evasion", "Cobalt Strike"],
-    status: "RESTRICTED",
-    color: "#bf00ff",
-  },
-  {
-    title: "Digital Forensics Toolkit",
-    desc: "Collection of automated forensic analysis scripts for disk imaging, memory dumps, and artifact extraction in incident response operations.",
-    tags: ["DFIR", "Python", "Volatility", "Autopsy"],
-    status: "ACTIVE",
-    color: "#00ff41",
-  },
-];
-
-const navItems = ["HOME", "ABOUT", "SKILLS", "PROJECTS", "CONTACT"];
-
-export default function HomePage() {
-  const [activeSection, setActiveSection] = useState("HOME");
-  const [bootComplete, setBootComplete] = useState(false);
-  const [bootLines, setBootLines] = useState<string[]>([]);
-  const [skillsVisible, setSkillsVisible] = useState(false);
-
-  const bootSequence = [
-    "[ OK ] Initializing secure shell...",
-    "[ OK ] Loading encryption modules...",
-    "[ OK ] Establishing VPN tunnel...",
-    "[ OK ] Bypassing firewall rules...",
-    "[ OK ] Authenticating identity...",
-    "[ OK ] ACCESS GRANTED — Welcome, Operator.",
-  ];
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < bootSequence.length) {
-        setBootLines((prev) => [...prev, bootSequence[i]]);
-        i++;
-      } else {
-        clearInterval(interval);
-        setTimeout(() => setBootComplete(true), 600);
-      }
-    }, 350);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (!bootComplete) return;
-    const timer = setTimeout(() => setSkillsVisible(true), 800);
-    return () => clearTimeout(timer);
-  }, [bootComplete]);
-
-  if (!bootComplete) {
-    return (
-      <div className="min-h-screen bg-darker-bg flex items-center justify-center font-mono">
-        <div className="p-8 max-w-xl w-full">
-          <div className="text-neon-green text-xs mb-4">
-            CHARITARDHA_PULIPATI_OS v4.2.0 — BOOT SEQUENCE
-          </div>
-          <div className="space-y-2">
-            {bootLines.map((line, idx) => (
-              <div
-                key={idx}
-                className="text-sm"
-                style={{
-                  color: line.includes("GRANTED") ? "#00ff41" : "#6b7280",
-                  textShadow: line.includes("GRANTED") ? "0 0 8px #00ff41" : "none",
-                }}
-              >
-                {line}
-              </div>
-            ))}
-            {bootLines.length < bootSequence.length && (
-              <span className="text-neon-green cursor-blink">█</span>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+function sectionTitle(eyebrow: string, title: string, copy?: string) {
   return (
-    <div className="min-h-screen bg-dark-bg font-mono relative scanlines crt-flicker">
-      {/* Matrix Background */}
-      <MatrixRain />
-
-      {/* Vignette */}
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse at center, transparent 40%, rgba(5,5,8,0.8) 100%)",
-          zIndex: 1,
-        }}
-      />
-
-      {/* NAV */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 border-b"
-        style={{
-          background: "rgba(5, 5, 8, 0.9)",
-          borderColor: "rgba(0,255,65,0.2)",
-          backdropFilter: "blur(10px)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-neon-green text-xs neon-text">▶</span>
-            <span className="text-neon-green text-sm font-bold tracking-widest">
-              CP<span className="text-gray-500">::</span>PORTFOLIO
-            </span>
-          </div>
-          <div className="flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setActiveSection(item)}
-                className="px-3 py-1 text-xs tracking-widest transition-all duration-200 rounded"
-                style={{
-                  color: activeSection === item ? "#00ff41" : "#4b5563",
-                  textShadow: activeSection === item ? "0 0 8px #00ff41" : "none",
-                  borderBottom: activeSection === item ? "1px solid #00ff41" : "1px solid transparent",
-                }}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-          <div className="flex items-center gap-1 text-xs text-gray-600">
-            <span className="w-2 h-2 rounded-full bg-neon-green inline-block"
-              style={{ boxShadow: "0 0 6px #00ff41" }} />
-            <span>SECURE</span>
-          </div>
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <section
-        id="home"
-        className="relative min-h-screen flex items-center justify-center"
-        style={{ zIndex: 2 }}
-      >
-        <div className="text-center px-6 max-w-4xl">
-          {/* Terminal prompt line */}
-          <div className="text-xs text-gray-500 mb-6 tracking-widest">
-            <span className="text-neon-green">root@cyberops</span>
-            <span className="text-gray-600">:</span>
-            <span className="text-neon-cyan">~</span>
-            <span className="text-gray-600">$ </span>
-            <span className="text-gray-400">whoami</span>
-          </div>
-
-          {/* NAME with glitch */}
-          <h1
-            className="glitch text-5xl md:text-7xl font-black tracking-widest mb-2 text-white"
-            data-text="CHARITARDHA"
-            style={{ letterSpacing: "0.15em" }}
-          >
-            CHARITARDHA
-          </h1>
-          <div
-            className="text-neon-green text-lg md:text-2xl tracking-[0.3em] font-bold mb-8"
-            style={{ textShadow: "0 0 10px #00ff41" }}
-          >
-            PULIPATI
-          </div>
-
-          {/* Typing role */}
-          <div className="text-sm md:text-lg mb-10 h-8">
-            <span className="text-gray-500">&gt; </span>
-            <TypingText
-              phrases={[
-                "Threat Hunter & Red Team Operator",
-                "Government Cyber Collaboration Lead",
-                "Digital Forensics Specialist",
-                "Offensive Security Expert",
-                "Catching Rogue Hackers. Officially.",
-              ]}
-              className="text-neon-cyan"
-            />
-          </div>
-
-          {/* Status badges */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {[
-              { label: "GOV CLEARANCE", color: "#00ff41" },
-              { label: "RED TEAM CERTIFIED", color: "#00d4ff" },
-              { label: "DFIR ACTIVE", color: "#bf00ff" },
-            ].map(({ label, color }) => (
-              <span
-                key={label}
-                className="text-xs px-3 py-1 rounded border tracking-widest"
-                style={{
-                  color,
-                  borderColor: color,
-                  boxShadow: `0 0 8px ${color}40`,
-                  background: `${color}10`,
-                }}
-              >
-                ⬡ {label}
-              </span>
-            ))}
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap justify-center gap-4">
-            
-              href="#projects"
-              className="px-6 py-3 text-sm tracking-widest border transition-all duration-300 rounded"
-              style={{
-                color: "#00ff41",
-                borderColor: "#00ff41",
-                boxShadow: "0 0 15px rgba(0,255,65,0.2)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(0,255,65,0.1)";
-                e.currentTarget.style.boxShadow = "0 0 25px rgba(0,255,65,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.boxShadow = "0 0 15px rgba(0,255,65,0.2)";
-              }}
-            >
-              [VIEW_OPERATIONS]
-            </a>
-            
-              href="#contact"
-              className="px-6 py-3 text-sm tracking-widest border transition-all duration-300 rounded"
-              style={{ color: "#6b7280", borderColor: "#374151" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#00d4ff";
-                e.currentTarget.style.borderColor = "#00d4ff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "#6b7280";
-                e.currentTarget.style.borderColor = "#374151";
-              }}
-            >
-              [ESTABLISH_CONTACT]
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs text-gray-600 tracking-widest flex flex-col items-center gap-1">
-          <span>SCROLL TO INFILTRATE</span>
-          <span className="text-neon-green animate-bounce">▼</span>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="relative py-24 px-6" style={{ zIndex: 2 }}>
-        <div className="max-w-5xl mx-auto">
-          <SectionHeader label="ABOUT" command="cat /etc/operator.profile" />
-
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="terminal-card p-6">
-              <div className="text-xs text-gray-500 mb-4 flex items-center gap-2">
-                <span className="text-neon-green">●</span> OPERATOR_PROFILE.txt
-              </div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                Cybersecurity operator specializing in{" "}
-                <span className="text-neon-green">threat hunting</span>,{" "}
-                <span className="text-neon-cyan">offensive security</span>, and{" "}
-                <span className="text-neon-purple">digital forensics</span>. Operating
-                at the intersection of red team ops and government collaboration to
-                identify, track, and neutralize malicious actors.
-              </p>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Officially authorized to pursue rogue hackers in collaboration with
-                government entities. Expertise spans full kill-chain attack simulation,
-                APT tracking, and incident response in high-stakes environments.
-              </p>
-            </div>
-
-            <div className="terminal-card p-6">
-              <div className="text-xs text-gray-500 mb-4 flex items-center gap-2">
-                <span className="text-neon-cyan">●</span> SPECIALIZATIONS.json
-              </div>
-              <div className="space-y-3">
-                {[
-                  { icon: "⚔", label: "Red & Purple Team Ops", color: "#00ff41" },
-                  { icon: "🔍", label: "Threat Hunting & APT Tracking", color: "#00d4ff" },
-                  { icon: "🏛", label: "Government Cyber Collaboration", color: "#bf00ff" },
-                  { icon: "🧬", label: "Digital Forensics & DFIR", color: "#00ff41" },
-                  { icon: "🕵", label: "OSINT & Cyber Intelligence", color: "#00d4ff" },
-                ].map(({ icon, label, color }) => (
-                  <div key={label} className="flex items-center gap-3 text-sm">
-                    <span>{icon}</span>
-                    <span style={{ color }}>{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS */}
-      <section id="skills" className="relative py-24 px-6" style={{ zIndex: 2 }}>
-        <div className="max-w-5xl mx-auto">
-          <SectionHeader label="SKILLS" command="nmap --scan-type skills 127.0.0.1" />
-
-          <div className="grid md:grid-cols-2 gap-6 mt-12">
-            {skills.map((skill, i) => (
-              <div key={skill.name} className="terminal-card p-5">
-                <div className="flex justify-between text-xs mb-2">
-                  <span className="text-gray-300 tracking-widest">{skill.name}</span>
-                  <span style={{ color: skill.color }}>{skill.level}%</span>
-                </div>
-                <div className="h-1.5 bg-gray-800 rounded">
-                  <div
-                    className="skill-bar-fill rounded"
-                    style={{
-                      width: skillsVisible ? `${skill.level}%` : "0%",
-                      background: skill.color,
-                      boxShadow: `0 0 8px ${skill.color}`,
-                      transitionDelay: `${i * 100}ms`,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <section id="projects" className="relative py-24 px-6" style={{ zIndex: 2 }}>
-        <div className="max-w-5xl mx-auto">
-          <SectionHeader label="OPERATIONS" command="ls -la /ops/classified/" />
-
-          <div className="grid md:grid-cols-2 gap-6 mt-12">
-            {projects.map((p) => (
-              <div key={p.title} className="terminal-card p-6 group cursor-pointer">
-                <div className="flex items-start justify-between mb-3">
-                  <span className="text-xs text-gray-500 tracking-widest">/ops/</span>
-                  <span
-                    className="text-xs px-2 py-0.5 rounded border tracking-widest"
-                    style={{
-                      color: p.color,
-                      borderColor: p.color,
-                      background: `${p.color}15`,
-                    }}
-                  >
-                    {p.status}
-                  </span>
-                </div>
-                <h3
-                  className="text-sm font-bold mb-3 tracking-wide"
-                  style={{ color: p.color }}
-                >
-                  {p.title}
-                </h3>
-                <p className="text-gray-400 text-xs leading-relaxed mb-4">{p.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-0.5 rounded"
-                      style={{
-                        color: "#6b7280",
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px solid #1f2937",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="relative py-24 px-6" style={{ zIndex: 2 }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <SectionHeader label="CONTACT" command="ssh operator@charitardha.io" />
-
-          <div className="terminal-card p-10 mt-12">
-            <div className="text-xs text-gray-500 mb-6 tracking-widest">
-              &gt; Initiating secure channel...
-            </div>
-            <p className="text-gray-400 text-sm mb-8">
-              Whether it&apos;s a red team engagement, government collaboration, or threat
-              intelligence sharing — open a secure channel.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              
-                href="mailto:contact@charitardha.io"
-                className="px-6 py-3 text-sm tracking-widest border rounded transition-all"
-                style={{ color: "#00ff41", borderColor: "#00ff41" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,255,65,0.1)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
-              >
-                [SEND_ENCRYPTED_MAIL]
-              </a>
-              
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 text-sm tracking-widest border rounded transition-all"
-                style={{ color: "#00d4ff", borderColor: "#00d4ff" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,212,255,0.1)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
-              >
-                [LINKEDIN_CONNECT]
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer
-        className="relative py-6 border-t text-center"
-        style={{ zIndex: 2, borderColor: "rgba(0,255,65,0.1)" }}
-      >
-        <p className="text-xs text-gray-600 tracking-widest">
-          <span className="text-neon-green">©</span> CHARITARDHA PULIPATI{" "}
-          <span className="text-gray-700">|</span> ALL SYSTEMS OPERATIONAL{" "}
-          <span className="text-gray-700">|</span>{" "}
-          <span className="text-neon-green">ENCRYPTED</span>
-        </p>
-      </footer>
+    <div className="max-w-2xl space-y-4">
+      <p className="eyebrow">{eyebrow}</p>
+      <h2 className="display-font text-4xl tracking-tight text-white md:text-5xl">{title}</h2>
+      {copy ? <p className="story-copy text-base md:text-lg">{copy}</p> : null}
     </div>
   );
 }
 
-// Reusable section header
-function SectionHeader({ label, command }: { label: string; command: string }) {
+export default async function HomePage() {
+  const { profile, socialLinks, projects, experiences, posts, settings } = await getPortfolioData();
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
+  const latestPosts = posts.slice(0, 3);
+  const text = (key: string, fallback: string) => settingValue(settings, key, fallback);
+
   return (
-    <div className="flex flex-col gap-2">
-      <div className="text-xs text-gray-600 tracking-widest">
-        <span className="text-neon-green">root@cyberops</span>:~${" "}
-        <span className="text-gray-400">{command}</span>
+    <main className="noise relative isolate overflow-hidden">
+      <div className="ambient-line absolute inset-0 opacity-40" />
+      <div className="mx-auto max-w-7xl px-5 pb-20 pt-6 md:px-8 lg:px-12">
+        <header className="section-shell sticky top-4 z-30 mb-8 flex items-center justify-between rounded-full px-5 py-3">
+          <Link href="/" className="text-sm font-medium tracking-[0.24em] text-sand uppercase">
+            {profile.name}
+          </Link>
+          <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
+            <Link href="#projects">Projects</Link>
+            <Link href="#experience">Experience</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="#contact">Contact</Link>
+            <Link
+              href="/admin"
+              className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white"
+            >
+              Admin
+            </Link>
+          </nav>
+        </header>
+
+        <section className="grid gap-8 pb-12 pt-4 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:pb-24">
+          <div className="space-y-8">
+            <span className="inline-flex rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-xs uppercase tracking-[0.26em] text-white/70">
+              {settingValue(settings, "heroBadge", "Available for selected projects in 2026")}
+            </span>
+            <div className="space-y-6">
+              <p className="eyebrow">{text("heroEyebrow", "Portfolio / Product / Identity")}</p>
+              <h1 className="display-font max-w-4xl text-6xl leading-none md:text-8xl">
+                {text("heroTitlePrefix", "Build a brand that")}{" "}
+                <span className="gradient-text">{text("heroTitleHighlight", "looks fearless")}</span>{" "}
+                {text("heroTitleSuffix", "and ships with substance.")}
+              </h1>
+              <p className="max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
+                {profile.tagline} {profile.bio}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href={text("heroPrimaryCta", "#projects")}
+                className="rounded-full bg-sand px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white"
+              >
+                {text("heroPrimaryCtaLabel", "Explore projects")}
+              </Link>
+              <Link
+                href={text("heroSecondaryCta", "/blog")}
+                className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white transition hover:bg-white/10"
+              >
+                {text("heroSecondaryCtaLabel", "Read the writing")}
+              </Link>
+            </div>
+
+            <div className="grid gap-4 pt-4 sm:grid-cols-3">
+              {[
+                [text("heroStatOneLabel", "Years shaping products"), text("heroStatOneValue", "4+")],
+                [text("heroStatTwoLabel", "Live-ready builds launched"), text("heroStatTwoValue", "18")],
+                [text("heroStatThreeLabel", "Focus areas"), text("heroStatThreeValue", "Web, SaaS, portfolios")]
+              ].map(([label, value]) => (
+                <div key={label} className="section-shell rounded-3xl p-5">
+                  <div className="text-3xl font-semibold text-white">{value}</div>
+                  <div className="mt-2 text-sm text-white/60">{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-shell relative overflow-hidden rounded-[2rem] p-5 shadow-glow">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+            <div className="relative space-y-5">
+              <div className="flex items-center justify-between">
+                <p className="text-sm uppercase tracking-[0.24em] text-white/60">Signal Profile</p>
+                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs text-emerald-200">
+                  {profile.availability ?? "Open to opportunities"}
+                </span>
+              </div>
+              <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={profile.avatarUrl ?? ""} alt={profile.name} className="h-[360px] w-full object-cover" />
+              </div>
+              <div className="space-y-3">
+                <p className="text-2xl font-semibold text-white">{profile.name}</p>
+                <p className="story-copy">{profile.location ?? "Remote / Global"} </p>
+              </div>
+              <div className="grid gap-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="card-hover flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                  >
+                    <span className="text-white">{link.platform}</span>
+                    <span className="text-sm text-white/60">{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid gap-6 pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="section-shell rounded-[2rem] p-8">
+            {sectionTitle(
+              text("aboutEyebrow", "About"),
+              text("aboutTitle", "Sharp engineering with a cinematic pulse.")
+            )}
+          </div>
+          <div className="section-shell rounded-[2rem] p-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              <p className="story-copy">{text("aboutParagraphOne", "I build portfolio systems, SaaS surfaces, and product experiences that carry a clear point of view. The aim is simple: fast sites, convincing storytelling, and backend structure that stays useful after launch.")}</p>
+              <p className="story-copy">{text("aboutParagraphTwo", "This starter ships with a Vercel-friendly architecture, an editable admin panel, structured content models, and a visual language designed to feel deliberate instead of generic.")}</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="space-y-8 py-14">
+          {sectionTitle(
+            text("projectsEyebrow", "Featured Work"),
+            text("projectsTitle", "Case studies designed to feel premium before a single line is read."),
+            text("projectsCopy", "Each project card carries both product context and visual weight, mirroring the kind of portfolio presence that makes people stop scrolling.")
+          )}
+          <div className="grid gap-6 lg:grid-cols-3">
+            {featuredProjects.map((project, index) => (
+              <article
+                key={project.id}
+                className="section-shell card-hover group rounded-[2rem] p-4"
+              >
+                <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.imageUrl ?? ""}
+                    alt={project.title}
+                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="space-y-4 p-4">
+                  <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-white/45">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span>{project.stack.slice(0, 2).join(" / ")}</span>
+                  </div>
+                  <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
+                  <p className="story-copy">{project.summary}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
+                      <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-3 pt-2 text-sm text-white/80">
+                    {project.liveUrl ? (
+                      <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                        Live
+                      </a>
+                    ) : null}
+                    {project.repoUrl ? (
+                      <a href={project.repoUrl} target="_blank" rel="noreferrer">
+                        Code
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" className="grid gap-8 py-14 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>{sectionTitle(text("experienceEyebrow", "Experience"), text("experienceTitle", "A timeline built around shipping real work."))}</div>
+          <div className="space-y-5">
+            {experiences.map((item) => (
+              <article key={item.id} className="section-shell rounded-[2rem] p-6">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div>
+                    <p className="text-xl font-semibold text-white">{item.role}</p>
+                    <p className="mt-1 text-white/70">{item.company}</p>
+                  </div>
+                  <span className="rounded-full border border-white/10 px-4 py-2 text-sm text-white/60">
+                    {item.period}
+                  </span>
+                </div>
+                <p className="story-copy mt-4">{item.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.highlights.map((highlight) => (
+                    <span key={highlight} className="rounded-full bg-white/5 px-3 py-1 text-xs text-white/65">
+                      {highlight}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-8 py-14 lg:grid-cols-[1fr_0.9fr]">
+          <div className="section-shell rounded-[2rem] p-8">
+            {sectionTitle(
+              text("writingEyebrow", "Writing"),
+              text("writingTitle", "Thoughtful notes on frontend systems, product craft, and digital presence.")
+            )}
+          </div>
+          <div className="space-y-4">
+            {latestPosts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="section-shell card-hover block rounded-[2rem] p-6"
+              >
+                <p className="eyebrow">Journal / {post.publishedAt?.getFullYear() ?? "Draft"}</p>
+                <h3 className="mt-3 text-2xl font-semibold text-white">{post.title}</h3>
+                <p className="mt-3 story-copy">{post.excerpt}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section id="contact" className="py-14">
+          <div className="section-shell rounded-[2.4rem] p-8 md:p-12">
+            <div className="grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-end">
+              <div className="space-y-4">
+                <p className="eyebrow">Contact</p>
+                <h2 className="display-font max-w-3xl text-4xl text-white md:text-6xl">
+                  {settingValue(settings, "contactHeadline", "Let us build something unforgettable.")}
+                </h2>
+                <p className="max-w-2xl text-lg leading-8 text-white/70">
+                  {text("contactCopy", "Whether you want a striking portfolio, a refined product surface, or a launch-ready full-stack app, this starter is set up to get you there fast.")}
+                </p>
+              </div>
+              <div className="flex flex-col gap-4 lg:items-end">
+                <a
+                  href={`mailto:${profile.contactEmail}`}
+                  className="rounded-full bg-sand px-6 py-3 text-sm font-semibold text-ink"
+                >
+                  {profile.contactEmail}
+                </a>
+                {profile.resumeUrl ? (
+                  <a
+                    href={profile.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border border-white/15 px-6 py-3 text-sm text-white"
+                  >
+                    View resume
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <div className="flex items-center gap-4">
-        <h2
-          className="text-2xl font-black tracking-[0.3em]"
-          style={{ color: "#00ff41", textShadow: "0 0 15px rgba(0,255,65,0.5)" }}
-        >
-          {label}
-        </h2>
-        <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, rgba(0,255,65,0.4), transparent)" }} />
-      </div>
-    </div>
+    </main>
   );
 }
