@@ -183,15 +183,43 @@ export default async function Home() {
           )}
 
           {/* CTA */}
-          <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="cyber-btn" style={{ borderColor: "#00ff41", color: "#00ff41" }}>
-              View Operations
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="#projects"
+              className="px-6 py-3 text-sm tracking-widest border transition-all duration-300 rounded"
+              style={{
+                color: "#00ff41",
+                borderColor: "#00ff41",
+                boxShadow: "0 0 15px rgba(0,255,65,0.2)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(0,255,65,0.1)";
+                e.currentTarget.style.boxShadow = "0 0 25px rgba(0,255,65,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.boxShadow = "0 0 15px rgba(0,255,65,0.2)";
+              }}
+            >
+              [VIEW_OPERATIONS]
             </a>
-            <a href="#contact" className="cyber-btn" style={{ borderColor: "#00ffff", color: "#00ffff" }}>
-              Establish Contact
+          
+            <a
+              href="#contact"
+              className="px-6 py-3 text-sm tracking-widest border transition-all duration-300 rounded"
+              style={{ color: "#6b7280", borderColor: "#374151" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#00d4ff";
+                e.currentTarget.style.borderColor = "#00d4ff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "#6b7280";
+                e.currentTarget.style.borderColor = "#374151";
+              }}
+            >
+              [ESTABLISH_CONTACT]
             </a>
           </div>
-        </div>
 
         {/* Right side data stream */}
         <div
