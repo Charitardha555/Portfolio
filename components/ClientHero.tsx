@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-const MatrixRain = dynamic(() => import("./MatrixRain"), { ssr: false });
-const TypingText = dynamic(() => import("./TypingText"), { ssr: false });
+const MatrixRain = dynamic(() => import("./MatrixRain"));
+const TypingText = dynamic(() => import("./TypingText"));
 
 export default function ClientHero() {
   return (
