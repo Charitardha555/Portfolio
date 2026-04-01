@@ -203,7 +203,7 @@ export default async function Home() {
               }}
             >
               [VIEW_OPERATIONS]
-            </a>
+            
           
             <a
               href="#contact"
@@ -365,6 +365,7 @@ export default async function Home() {
               );
             })}
           </div>
+        </section>
 
           <p className="text-xs tracking-widest mb-5" style={{ color: "rgba(255,255,255,0.2)" }}>
             // TOOLS & FRAMEWORKS
