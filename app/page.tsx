@@ -74,19 +74,26 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < bootSequence.length) {
-        setBootLines((prev) => [...prev, bootSequence[i]]);
-        i += 1;
-      } else {
-        clearInterval(interval);
-        setTimeout(() => setBootComplete(true), 600);
-      }
-    }, 350);
+  let i = 0;
 
-    return () => clearInterval(interval);
-  }, []);
+  const interval = setInterval(() => {
+    if (i >= bootSequence.length) {
+      clearInterval(interval);
+      setTimeout(() => setBootComplete(true), 600);
+      return;
+    }
+
+    const line = bootSequence[i];
+
+    if (line) {
+      setBootLines((prev) => [...prev, line]);
+    }
+
+    i++;
+  }, 350);
+
+  return () => clearInterval(interval);
+}, []);
 
   useEffect(() => {
     if (!bootComplete) return;
