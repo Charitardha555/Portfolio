@@ -349,12 +349,15 @@ export default function HomePage() {
               </div>
               <div className="space-y-3">
                 {[
-                  { icon: "⚔", label: "Red & Purple Team Ops", color: "#7CFFB2" },
-                  { icon: "🔍", label: "Threat Hunting & APT Tracking", color: "#29F0FF" },
-                  { icon: "🏛", label: "Government Cyber Collaboration", color: "#B48CFF" },
-                  { icon: "🧬", label: "Digital Forensics & DFIR", color: "#FF8A3D" },
-                  { icon: "🕵", label: "OSINT & Cyber Intelligence", color: "#FFE56F" }
-                ].map(({ icon, label, color }) => (
+  { icon: "🛡", label: "Cybersecurity & Ethical Hacking", color: "#7CFFB2" },
+  { icon: "🏁", label: "CTF Competitions & Labs (THM Top 4%)", color: "#29F0FF" },
+  { icon: "⚔", label: "Red Teaming & Adversary Simulation", color: "#B48CFF" },
+  { icon: "🧬", label: "Digital Forensics & Cyber Criminology", color: "#FF8A3D" },
+  { icon: "🤖", label: "Generative AI & Prompt Engineering", color: "#FFE56F" },
+  { icon: "📡", label: "Electronics & Embedded Systems (ECE)", color: "#7CFFB2" }
+].map(({ icon, label, color }) => (
+
+
                   <div key={label} className="flex items-center gap-3 text-sm">
                     <span>{icon}</span>
                     <span style={{ color }}>{label}</span>
@@ -485,7 +488,7 @@ export default function HomePage() {
                 [SEND_ENCRYPTED_MAIL]
               </a>
               <a
-                href="https://linkedin.com/in/charitardh-pulipati"
+                href="https://linkedin.com/in/charitardha-pulipati"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 text-sm tracking-widest border rounded transition-all"
