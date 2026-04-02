@@ -10,19 +10,21 @@ const TypingText = dynamic(() => import("../components/TypingText"), { ssr: fals
 const skills = [
   { name: "Cybersecurity", level: 95, color: "#7CFFB2" },
   { name: "Penetration Testing", level: 92, color: "#29F0FF" },
-  { name: "Digital Forensics", level: 90, color: "#B48CFF" },
+  { name: "Digital Forensics", level: 86, color: "#B48CFF" },
   { name: "Cyber Threat Intelligence", level: 88, color: "#FF8A3D" },
   { name: "Red Teaming", level: 89, color: "#FF5C8A" },
   { name: "Web Application Security", level: 90, color: "#7CFFB2" },
   { name: "Generative AI", level: 85, color: "#29F0FF" },
-  { name: "Python", level: 87, color: "#FFE56F" }
+  { name: "Python", level: 69, color: "#FFE56F" }
 ];
 
 const certifications = [
-  { title: "CRTA", issuer: "Certified Red Team Analyst", year: "2026", color: "#7CFFB2" },
-  { title: "Top 4% on THM", issuer: "TryHackMe", year: "2026", color: "#29F0FF" },
-  { title: "Certified Cyber Criminologist", issuer: "Virtual Cyber Labs", year: "2026", color: "#B48CFF" },
-  { title: "Cyber Security Training", issuer: "Hackers Gurukul", year: "2025", color: "#FF8A3D" }
+  { title: "Tata - Cybersecurity Analyst Job Simulation", issuer: "Forage", year: "2025", color: "#FF6B9D" },
+  { title: "Cybersecurity Fundamentals", issuer: "IBM", year: "2025", color: "#4ECDC4" },
+  { title: "Oracle Certified AI Foundations Associate", issuer: "Oracle", year: "2025", color: "#FFE66D" },
+  { title: "Certified Cybersecurity Educator Professional (CCEP)", issuer: "Red Team Leaders", year: "2025", color: "#95E1D3" },
+  { title: "CYBER DIKSHA_Specialised Cybersecurity Foundations Training", issuer: "Data Security Council of India", year: "2025", color: "#C7CEEA" },
+  { title: "Cybersecurity Internship", issuer: "Elevate Labs", year: "2025", color: "#FF8B94" }
 ];
 
 const projects = [
