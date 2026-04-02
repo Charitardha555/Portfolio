@@ -115,8 +115,8 @@ export default function HomePage() {
                 key={idx}
                 className="text-sm"
                 style={{
-                  color: line.includes("GRANTED") ? "#7CFFB2" : "#7d8796",
-                  textShadow: line.includes("GRANTED") ? "0 0 10px #7CFFB2" : "none"
+                  color: line?.includes("GRANTED") ? "#7CFFB2" : "#7d8796",
+                  textShadow: line?.includes("GRANTED") ? "0 0 10px #7CFFB2" : "none"
                 }}
               >
                 {line}
