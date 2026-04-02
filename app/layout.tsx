@@ -4,9 +4,6 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "SYSTEM://PORTFOLIO | Cyber Security Head",
   description: "Elite Cybersecurity Professional — Penetration Tester, Threat Hunter, Government Collaborator",
-};
-
-export const metadata = {
   icons: {
     icon: "/favicon.ico",
   },
