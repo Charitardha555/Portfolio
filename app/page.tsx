@@ -8,53 +8,68 @@ const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: fals
 const TypingText = dynamic(() => import("../components/TypingText"), { ssr: false });
 
 const skills = [
-  { name: "Threat Hunting", level: 95, color: "#7CFFB2" },
+  { name: "Cybersecurity", level: 95, color: "#7CFFB2" },
   { name: "Penetration Testing", level: 92, color: "#29F0FF" },
   { name: "Digital Forensics", level: 90, color: "#B48CFF" },
-  { name: "Red Team Ops", level: 88, color: "#FF8A3D" },
-  { name: "Malware Analysis", level: 85, color: "#FF5C8A" },
-  { name: "OSINT & Recon", level: 93, color: "#7CFFB2" },
-  { name: "Incident Response", level: 91, color: "#29F0FF" },
-  { name: "Python / Scripting", level: 87, color: "#FFE56F" }
+  { name: "Cyber Threat Intelligence", level: 88, color: "#FF8A3D" },
+  { name: "Red Teaming", level: 89, color: "#FF5C8A" },
+  { name: "Web Application Security", level: 90, color: "#7CFFB2" },
+  { name: "Generative AI", level: 85, color: "#29F0FF" },
+  { name: "Python", level: 87, color: "#FFE56F" }
 ];
 
 const certifications = [
-  { title: "CEH", issuer: "EC-Council", year: "2024", color: "#7CFFB2" },
-  { title: "eJPT", issuer: "INE Security", year: "2024", color: "#29F0FF" },
-  { title: "Security+", issuer: "CompTIA", year: "2023", color: "#B48CFF" },
-  { title: "DFIR Foundations", issuer: "Blue Team Labs", year: "2023", color: "#FF8A3D" }
+  { title: "CRTA", issuer: "Certified Red Team Analyst", year: "2026", color: "#7CFFB2" },
+  { title: "Top 4% on THM", issuer: "TryHackMe", year: "2026", color: "#29F0FF" },
+  { title: "Certified Cyber Criminologist", issuer: "Virtual Cyber Labs", year: "2026", color: "#B48CFF" },
+  { title: "Cyber Security Training", issuer: "Hackers Gurukul", year: "2025", color: "#FF8A3D" }
 ];
 
 const projects = [
   {
-    title: "STELLA - AI Field Assistant",
-    desc: "Offline AI assistant on Raspberry Pi 4 with OLED display, espeak-ng TTS, and Ollama LLM backend. Built for field ops without internet dependency.",
-    tags: ["Python", "Raspberry Pi", "Ollama", "OLED"],
-    status: "DEPLOYED",
+    title: "Certified Cyber Criminologist",
+    desc: "Working with Virtual Cyber Labs in a cyber criminology-focused role, building practical exposure in cybercrime investigation, criminology, and forensic-oriented security work.",
+    tags: ["Cyber Criminology", "Digital Forensics", "Cybercrime Investigation", "CTI"],
+    status: "FEB 2026 - PRESENT",
     color: "#7CFFB2"
   },
   {
-    title: "Threat Intelligence Pipeline",
-    desc: "Automated threat feed aggregation and IOC correlation engine used in collaboration with government cyber units for tracking APT activity.",
-    tags: ["Python", "OSINT", "MITRE ATT&CK", "Splunk"],
-    status: "CLASSIFIED",
+    title: "Cyber Security Intern",
+    desc: "Serving as a Cyber Security Intern at Hackers Gurukul, gaining hands-on experience in ethical hacking, vulnerability assessment, penetration testing, and practical security operations.",
+    tags: ["Ethical Hacking", "Vulnerability Assessment", "Penetration Testing", "Kali Linux"],
+    status: "MAY 2025 - PRESENT",
     color: "#29F0FF"
   },
   {
-    title: "Red Team C2 Framework",
-    desc: "Custom command-and-control infrastructure for authorized red team engagements. Includes evasion techniques and beacon obfuscation.",
-    tags: ["C2", "Red Team", "Evasion", "Cobalt Strike"],
-    status: "RESTRICTED",
+    title: "Red Team & CTF Practice",
+    desc: "Actively strengthening offensive security skills through CTF participation, red teaming practice, and attack-focused labs, supported by a Top 4% TryHackMe standing and CRTA achievement.",
+    tags: ["CTF", "Red Teaming", "TryHackMe", "Adversary Simulation"],
+    status: "ONGOING",
     color: "#B48CFF"
   },
   {
-    title: "Digital Forensics Toolkit",
-    desc: "Collection of automated forensic analysis scripts for disk imaging, memory dumps, and artifact extraction in incident response operations.",
-    tags: ["DFIR", "Python", "Volatility", "Autopsy"],
+    title: "AI & Security Builder",
+    desc: "Combining cybersecurity with generative AI, Python, and web application development while exploring prompt engineering, machine learning, and practical AI-assisted security workflows.",
+    tags: ["Generative AI", "Python", "Web App Security", "Prompt Engineering"],
     status: "ACTIVE",
     color: "#FF8A3D"
   }
 ];
+
+const SPECIALIZATIONS = {
+  left: [
+    "Penetration Testing",
+    "Web Application Security",
+    "Digital Forensics",
+    "Cybercrime Investigation"
+  ],
+  right: [
+    "Cyber Threat Intelligence",
+    "Red Teaming",
+    "Generative AI",
+    "Python Development"
+  ]
+};
 
 const navItems = ["HOME", "ABOUT", "SKILLS", "CERTIFICATIONS", "PROJECTS", "CONTACT"];
 
@@ -228,12 +243,13 @@ export default function HomePage() {
             <span className="text-gray-500">&gt; </span>
             <TypingText
               phrases={[
-                "Threat Hunter & Red Team Operator",
-                "Government Cyber Collaboration Lead",
-                "Digital Forensics Specialist",
-                "Offensive Security Expert",
-                "Catching Rogue Hackers. Officially."
-              ]}
+  "Cybersecurity Intern",
+  "CTF Competitor",
+  "Ethical Hacker",
+  "AI Prompt Engineer",
+  "Electronics Engineer",
+  "Top 4% on TryHackMe"
+]}
               className="text-neon-cyan"
             />
           </div>
@@ -456,7 +472,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:contact@charitardha.io"
+                href="mailto:charitardhapulipati@gmail.com"
                 className="px-6 py-3 text-sm tracking-widest border rounded transition-all"
                 style={{ color: "#7CFFB2", borderColor: "#7CFFB2" }}
                 onMouseEnter={(e) => {
@@ -469,7 +485,7 @@ export default function HomePage() {
                 [SEND_ENCRYPTED_MAIL]
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/in/charitardh-pulipati"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 text-sm tracking-widest border rounded transition-all"
