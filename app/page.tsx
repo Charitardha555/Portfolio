@@ -19,12 +19,13 @@ const skills = [
 ];
 
 const certifications = [
-  { title: "Tata - Cybersecurity Analyst Job Simulation", issuer: "Forage", year: "2025", color: "#FF6B9D" },
+  { title: "Cybersecurity & AI Training", issuer: "Hackers Gurukul", year: "2025", color: "#FF8B94"},
   { title: "Cybersecurity Fundamentals", issuer: "IBM", year: "2025", color: "#4ECDC4" },
   { title: "Oracle Certified AI Foundations Associate", issuer: "Oracle", year: "2025", color: "#FFE66D" },
   { title: "Certified Cybersecurity Educator Professional (CCEP)", issuer: "Red Team Leaders", year: "2025", color: "#95E1D3" },
   { title: "CYBER DIKSHA_Specialised Cybersecurity Foundations Training", issuer: "Data Security Council of India", year: "2025", color: "#C7CEEA" },
-  { title: "Cybersecurity Internship", issuer: "Elevate Labs", year: "2025", color: "#FF8B94" }
+  { title: "Cybersecurity Internship", issuer: "Elevate Labs", year: "2025", color: "#FF8B94" },
+  { title: "Tata - Cybersecurity Analyst Job Simulation", issuer: "Forage", year: "2025", color: "#FF6B9D" }
 ];
 
 const projects = [
