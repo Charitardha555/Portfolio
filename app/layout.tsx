@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SYSTEM://PORTFOLIO | Cyber Security Head",
+  title: "Charitardha Pulpati ://PORTFOLIO | Digital Technologist",
   description: "Elite Cybersecurity Professional — Penetration Tester, Threat Hunter, Government Collaborator",
   icons: {
     icon: "/favicon.ico",
