@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { getPortfolioData } from "@/lib/site-data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-domain.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://charitardhapulipati.vercel.app";
   const { posts } = await getPortfolioData();
 
   return [
