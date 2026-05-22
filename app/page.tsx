@@ -45,7 +45,7 @@ const projects = [
   },
   {
     title: "Red Team & CTF Practice",
-    desc: "Actively strengthening offensive security skills through CTF participation, red teaming practice, and attack-focused labs, supported by a Top 4% TryHackMe standing and CRTA achievement.",
+    desc: "Actively strengthening offensive security skills through CTF participation, red teaming practice, and attack-focused labs, supported by a Top 3% TryHackMe standing and CRTA achievement.",
     tags: ["CTF", "Red Teaming", "TryHackMe", "Adversary Simulation"],
     status: "ONGOING",
     color: "#B48CFF"
