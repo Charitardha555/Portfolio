@@ -8,10 +8,10 @@ const MatrixRain = dynamic(() => import("../components/MatrixRain"), { ssr: fals
 const TypingText = dynamic(() => import("../components/TypingText"), { ssr: false });
 
 const skills = [
-  { name: "Cybersecurity", level: 95, color: "#7CFFB2" },
-  { name: "Penetration Testing", level: 92, color: "#29F0FF" },
+  { name: "Cyber Crime Investigation", level: 85, color: "#7CFFB2" }, 
   { name: "Digital Forensics", level: 86, color: "#B48CFF" },
   { name: "Cyber Threat Intelligence", level: 88, color: "#FF8A3D" },
+  { name: "Penetration Testing", level: 92, color: "#29F0FF" },
   { name: "Red Teaming", level: 89, color: "#FF5C8A" },
   { name: "Web Application Security", level: 90, color: "#7CFFB2" },
   { name: "Generative AI", level: 85, color: "#29F0FF" },
