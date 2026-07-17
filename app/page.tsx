@@ -19,7 +19,8 @@ const skills = [
 ];
 
 const certifications = [
-  { title: "Cybersecurity & AI Training", issuer: "Hackers Gurukul", year: "2025", color: "#FF8B94"},
+  { title: "CERTIFIED CYBER CRIMINOLOGIST", issuer: "VIRTUAL CYBER LABS", year: "2026", color: "#AA00FF"},
+  { title: "Cybersecurity & AI Training", issuer: "Hackers Gurukul", year: "2025", color: "#FF0000"},
   { title: "Cybersecurity Fundamentals", issuer: "IBM", year: "2025", color: "#4ECDC4" },
   { title: "Oracle Certified AI Foundations Associate", issuer: "Oracle", year: "2025", color: "#FFE66D" },
   { title: "Certified Cybersecurity Educator Professional (CCEP)", issuer: "Red Team Leaders", year: "2025", color: "#95E1D3" },
@@ -259,7 +260,7 @@ export default function HomePage() {
 
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {[
-              { label: "GOV CLEARANCE", color: "#7CFFB2" },
+              { label: "GOV RECONGNIZED", color: "#7CFFB2" },
               { label: "RED TEAM CERTIFIED", color: "#29F0FF" },
               { label: "DFIR ACTIVE", color: "#B48CFF" }
             ].map(({ label, color }) => (
